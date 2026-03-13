@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tool Details – TOOLMIND AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" defer></script>
+</head>
+<body class="detail-body">
+  <header class="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="logo">TOOLMIND AI</a>
+      <nav class="nav-links" id="nav-links">
+        <a href="index.html#hero">Home</a>
+        <a href="index.html#categories">Categories</a>
+        <a href="https://github.com/your-username/100-ai-tools" target="_blank" rel="noopener">GitHub Repository</a>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="tool-detail-main">
+    <section class="tool-detail-card" id="tool-detail">
+      <div class="loader-wrapper" id="tool-loader">
+        <div class="loader"></div>
+        <p>Loading tool...</p>
+      </div>
+      <div id="tool-content" hidden>
+        <p class="detail-category-badge" id="tool-category"></p>
+        <h1 id="tool-name"></h1>
+        <p id="tool-description" class="detail-description"></p>
+        <div class="detail-actions">
+          <a id="tool-website" class="btn btn-primary" href="#" target="_blank" rel="noopener">
+            Visit Official Website
+          </a>
+          <a href="index.html" class="btn btn-ghost">Back to directory</a>
+        </div>
+        <section class="tool-readme-section">
+          <h2 class="tool-readme-heading">Tool Guide</h2>
+          <div id="tool-readme-loader" class="loader-wrapper">
+            <div class="loader"></div>
+            <p>Loading detailed README...</p>
+          </div>
+          <div id="tool-readme-error" class="empty-state" hidden></div>
+          <article id="tool-readme" class="tool-readme" hidden></article>
+        </section>
+      </div>
+      <div id="tool-error" class="empty-state" hidden></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p>© <span id="year"></span> TOOLMIND AI – 100 AI Tools Directory.</p>
+    </div>
+  </footer>
+
+  <script src="js/toolpage.js"></script>
+</body>
+</html>

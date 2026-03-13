@@ -1,0 +1,703 @@
+[
+  {
+    "id": "chatgpt",
+    "name": "ChatGPT",
+    "category": "Writing AI",
+    "description": "ChatGPT is an AI chatbot developed by OpenAI that can understand and generate human-like text.",
+    "website": "https://chat.openai.com"
+  },
+  {
+    "id": "claude",
+    "name": "Claude",
+    "category": "Writing AI",
+    "description": "AI chatbot developed by Anthropic that generates human-like text and is especially good at analyzing long documents.",
+    "website": "https://claude.ai"
+  },
+  {
+    "id": "gemini",
+    "name": "Gemini",
+    "category": "Writing AI",
+    "description": "AI assistant developed by Google that can generate text, answer questions, and help with writing, research, and coding.",
+    "website": "https://gemini.google.com"
+  },
+  {
+    "id": "copy-ai",
+    "name": "Copy.ai",
+    "category": "Writing AI",
+    "description": "AI writing assistant mainly used for marketing and content creation such as ads, social media posts, and product descriptions.",
+    "website": "https://www.copy.ai"
+  },
+  {
+    "id": "writesonic",
+    "name": "Writesonic",
+    "category": "Writing AI",
+    "description": "AI writing assistant designed to create blogs, marketing content, and SEO-optimized articles quickly.",
+    "website": "https://writesonic.com"
+  },
+  {
+    "id": "quillbot",
+    "name": "QuillBot",
+    "category": "Writing AI",
+    "description": "AI writing tool used for paraphrasing, grammar checking, and summarizing text.",
+    "website": "https://quillbot.com"
+  },
+  {
+    "id": "grammarly-ai",
+    "name": "Grammarly AI",
+    "category": "Writing AI",
+    "description": "AI writing assistant that checks grammar, spelling, clarity, and tone to improve written communication.",
+    "website": "https://www.grammarly.com"
+  },
+  {
+    "id": "notion-ai",
+    "name": "Notion AI",
+    "category": "Writing AI",
+    "description": "AI assistant integrated into the Notion workspace that helps with writing, summarizing notes, organizing knowledge, and automating tasks.",
+    "website": "https://www.notion.so/product/ai"
+  },
+  {
+    "id": "jasper-ai",
+    "name": "Jasper AI",
+    "category": "Writing AI",
+    "description": "AI content generation tool mainly used for marketing, blog writing, and business communication.",
+    "website": "https://www.jasper.ai"
+  },
+  {
+    "id": "rytr",
+    "name": "Rytr",
+    "category": "Writing AI",
+    "description": "AI writing assistant used for generating marketing content, blog ideas, emails, and social media posts.",
+    "website": "https://rytr.me"
+  },
+  {
+    "id": "midjourney",
+    "name": "Midjourney",
+    "category": "Image AI",
+    "description": "AI image generator that creates high-quality artwork from text prompts.",
+    "website": "https://www.midjourney.com"
+  },
+  {
+    "id": "dall-e",
+    "name": "DALL·E",
+    "category": "Image AI",
+    "description": "AI image generation tool developed by OpenAI that creates images from text prompts.",
+    "website": "https://openai.com/dall-e"
+  },
+  {
+    "id": "leonardo-ai",
+    "name": "Leonardo AI",
+    "category": "Image AI",
+    "description": "AI image generation platform used to create artwork, illustrations, and game assets from text prompts.",
+    "website": "https://leonardo.ai"
+  },
+  {
+    "id": "playground-ai",
+    "name": "Playground AI",
+    "category": "Image AI",
+    "description": "Web-based AI image generator that creates and edits images from text prompts.",
+    "website": "https://playgroundai.com"
+  },
+  {
+    "id": "canva-ai",
+    "name": "Canva AI",
+    "category": "Image AI",
+    "description": "AI-powered design tools inside Canva that generate images, layouts, and design elements from text prompts.",
+    "website": "https://www.canva.com"
+  },
+  {
+    "id": "adobe-firefly",
+    "name": "Adobe Firefly",
+    "category": "Image AI",
+    "description": "AI image generation tool by Adobe used to create and edit images using text prompts.",
+    "website": "https://firefly.adobe.com"
+  },
+  {
+    "id": "ideogram",
+    "name": "Ideogram",
+    "category": "Image AI",
+    "description": "AI image generator that specializes in creating images with accurate text and typography.",
+    "website": "https://ideogram.ai"
+  },
+  {
+    "id": "stable-diffusion",
+    "name": "Stable Diffusion",
+    "category": "Image AI",
+    "description": "Open-source AI model that generates images from text prompts.",
+    "website": "https://stability.ai"
+  },
+  {
+    "id": "dreamstudio",
+    "name": "DreamStudio",
+    "category": "Image AI",
+    "description": "Official web platform for generating images using Stable Diffusion.",
+    "website": "https://dreamstudio.ai"
+  },
+  {
+    "id": "nightcafe",
+    "name": "NightCafe",
+    "category": "Image AI",
+    "description": "AI image generator that creates digital artwork from text prompts using multiple AI models.",
+    "website": "https://nightcafe.studio"
+  },
+  {
+    "id": "runway-ml",
+    "name": "Runway ML",
+    "category": "Video AI",
+    "description": "AI video generation platform that creates and edits videos using text prompts and AI models.",
+    "website": "https://runwayml.com"
+  },
+  {
+    "id": "pika-labs",
+    "name": "Pika Labs",
+    "category": "Video AI",
+    "description": "AI video generator that creates short animated videos from text prompts or images.",
+    "website": "https://pika.art"
+  },
+  {
+    "id": "synthesia",
+    "name": "Synthesia",
+    "category": "Video AI",
+    "description": "AI video platform that generates videos using AI avatars and text scripts.",
+    "website": "https://www.synthesia.io"
+  },
+  {
+    "id": "luma-ai",
+    "name": "Luma AI",
+    "category": "Video AI",
+    "description": "AI platform that generates videos and 3D scenes from text prompts or images.",
+    "website": "https://lumalabs.ai"
+  },
+  {
+    "id": "invideo-ai",
+    "name": "InVideo AI",
+    "category": "Video AI",
+    "description": "AI video generator that creates complete videos from text prompts including script, visuals, and voiceover.",
+    "website": "https://invideo.io"
+  },
+  {
+    "id": "heygen",
+    "name": "HyGen",
+    "category": "Video AI",
+    "description": "AI video generator that creates videos using realistic AI avatars and text scripts.",
+    "website": "https://www.heygen.com"
+  },
+  {
+    "id": "kaiber-ai",
+    "name": "Kaiber AI",
+    "category": "Video AI",
+    "description": "AI video generator that creates animated videos and music visuals from text prompts, images, or audio.",
+    "website": "https://kaiber.ai"
+  },
+  {
+    "id": "pictory-ai",
+    "name": "Pictory AI",
+    "category": "Video AI",
+    "description": "AI video generator that converts text, scripts, or blog articles into videos automatically.",
+    "website": "https://pictory.ai"
+  },
+  {
+    "id": "descript",
+    "name": "Descript",
+    "category": "Video AI",
+    "description": "AI-powered video and podcast editor that allows users to edit media by editing text transcripts.",
+    "website": "https://www.descript.com"
+  },
+  {
+    "id": "veed-ai",
+    "name": "VEED AI",
+    "category": "Video AI",
+    "description": "AI-powered online video editor that allows users to create, edit, and generate videos using AI tools.",
+    "website": "https://www.veed.io"
+  },
+  {
+    "id": "github-copilot",
+    "name": "GitHub Copilot",
+    "category": "Coding AI",
+    "description": "AI coding assistant that suggests and generates code in real time inside code editors.",
+    "website": "https://github.com/features/copilot"
+  },
+  {
+    "id": "cursor-ai",
+    "name": "Cursor AI",
+    "category": "Coding AI",
+    "description": "AI-powered code editor that allows developers to generate, edit, and understand code using natural language.",
+    "website": "https://cursor.sh"
+  },
+  {
+    "id": "codeium",
+    "name": "Codeium",
+    "category": "Coding AI",
+    "description": "AI coding assistant that provides real-time code suggestions and autocompletion.",
+    "website": "https://codeium.com"
+  },
+  {
+    "id": "replit-ai",
+    "name": "Replit AI",
+    "category": "Coding AI",
+    "description": "AI coding platform that allows users to write, run, and deploy applications directly from a browser.",
+    "website": "https://replit.com"
+  },
+  {
+    "id": "tabnine",
+    "name": "Tabnine",
+    "category": "Coding AI",
+    "description": "AI coding assistant that provides intelligent code autocompletion inside code editors.",
+    "website": "https://www.tabnine.com"
+  },
+  {
+    "id": "amazon-codewhisperer",
+    "name": "Amazon CodeWhispere",
+    "category": "Coding AI",
+    "description": "AI coding assistant developed by AWS that generates real-time code suggestions and cloud development code.",
+    "website": "https://aws.amazon.com/codewhisperer"
+  },
+  {
+    "id": "cody-ai",
+    "name": "Cody AI",
+    "category": "Coding AI",
+    "description": "AI coding assistant by Sourcegraph designed to understand and analyze large codebases.",
+    "website": "https://sourcegraph.com/cody"
+  },
+  {
+    "id": "blackbox-ai",
+    "name": "Blackbox AI",
+    "category": "Coding AI",
+    "description": "AI coding assistant that searches code examples and generates programming solutions.",
+    "website": "https://www.blackbox.ai"
+  },
+  {
+    "id": "ask-codi",
+    "name": "Ask Codi",
+    "category": "Coding AI",
+    "description": "AI coding assistant that generates code and SQL queries from natural language prompts.",
+    "website": "https://www.askcodi.com"
+  },
+  {
+    "id": "mutable-ai",
+    "name": "Mutable AI",
+    "category": "Coding AI",
+    "description": "AI coding assistant that helps developers generate, refactor, and document code.",
+    "website": "http://mutable.ai"
+  },
+  {
+    "id": "perplexity-ai",
+    "name": "Perplexity AI",
+    "category": "Research AI",
+    "description": "AI-powered search engine that provides summarized answers with citations from reliable sources.",
+    "website": "https://www.perplexity.ai"
+  },
+  {
+    "id": "elicit-ai",
+    "name": "Elicit AI",
+    "category": "Research AI",
+    "description": "AI research assistant that helps find, summarize, and analyze academic research papers.",
+    "website": "https://elicit.org"
+  },
+  {
+    "id": "consensus-ai",
+    "name": "Consensus AI",
+    "category": "Research AI",
+    "description": "AI search engine that finds answers from scientific research papers.",
+    "website": "https://consensus.app"
+  },
+  {
+    "id": "scispace",
+    "name": "SciSpace",
+    "category": "Research AI",
+    "description": "AI platform that helps users read, understand, and analyze research papers.",
+    "website": "https://www.scispace.com"
+  },
+  {
+    "id": "explainpaper",
+    "name": "Explainpaper",
+    "category": "Research AI",
+    "description": "AI tool that explains complex research papers by simplifying highlighted text.",
+    "website": "https://www.explainpaper.com"
+  },
+  {
+    "id": "research-rabbit",
+    "name": "Research Rabbit",
+    "category": "Research AI",
+    "description": "AI platform that helps discover and explore research papers using recommendation systems.",
+    "website": "https://www.researchrabbit.ai"
+  },
+  {
+    "id": "connected-papers",
+    "name": "Connected Papers",
+    "category": "Research AI",
+    "description": "AI research tool that visualizes relationships between academic papers using graphs.",
+    "website": "https://www.connectedpapers.com"
+  },
+  {
+    "id": "scholarcy",
+    "name": "Scholarcy",
+    "category": "Research AI",
+    "description": "AI tool that summarizes research papers and extracts key findings automatically.",
+    "website": "https://www.scholarcy.com"
+  },
+  {
+    "id": "paperpile-ai",
+    "name": "Paperpile AI",
+    "category": "Research AI",
+    "description": "Reference management tool that helps organize research papers and generate citations.",
+    "website": "https://paperpile.com"
+  },
+  {
+    "id": "scite-ai",
+    "name": "Scite AI",
+    "category": "Research AI",
+    "description": "AI tool that analyzes research citations and shows whether studies support or contradict claims.",
+    "website": "https://scite.ai"
+  },
+  {
+    "id": "mem-ai",
+    "name": "Mem AI",
+    "category": "Productivity AI",
+    "description": "AI-powered note-taking tool that automatically organizes and connects notes.",
+    "website": "https://mem.ai"
+  },
+  {
+    "id": "taskade-ai",
+    "name": "Taskade AI",
+    "category": "Productivity AI",
+    "description": "AI-powered workspace for managing tasks, projects, and team collaboration.",
+    "website": "https://www.taskade.com"
+  },
+  {
+    "id": "motion-ai",
+    "name": "Motion AI",
+    "category": "Productivity AI",
+    "description": "AI scheduling tool that automatically plans tasks and meetings in a calendar.",
+    "website": "https://www.usemotion.com"
+  },
+  {
+    "id": "rewind-ai",
+    "name": "Rewind AI",
+    "category": "Productivity AI",
+    "description": "AI tool that records and allows users to search everything they have seen or done on their computer.",
+    "website": "https://www.rewind.ai"
+  },
+  {
+    "id": "fireflies-ai",
+    "name": "Fireflies AI",
+    "category": "Productivity AI",
+    "description": "AI meeting assistant that records, transcribes, and summarizes meetings automatically.",
+    "website": "https://fireflies.ai"
+  },
+  {
+    "id": "otter-ai",
+    "name": "Otter AI",
+    "category": "Productivity AI",
+    "description": "AI transcription tool that converts meetings and conversations into text.",
+    "website": "https://otter.ai"
+  },
+  {
+    "id": "tome-ai",
+    "name": "Tome AI",
+    "category": "Productivity AI",
+    "description": "AI-powered presentation generator that creates slides and storytelling content from prompts.",
+    "website": "https://tome.app"
+  },
+  {
+    "id": "reflect-ai",
+    "name": "Reflect AI",
+    "category": "Productivity AI",
+    "description": "AI-powered note-taking and personal knowledge management tool.",
+    "website": "https://reflect.app"
+  },
+  {
+    "id": "superhuman-ai",
+    "name": "SuperHuman AI",
+    "category": "Productivity AI",
+    "description": "AI-powered email productivity tool that helps manage inboxes, generate replies, and streamline communication.",
+    "website": "https://superhuman.com"
+  },
+  {
+    "id": "clickup-ai",
+    "name": "ClickUp AI",
+    "category": "Productivity AI",
+    "description": "AI-powered assistant built into the ClickUp platform that helps teams write faster, summarize content, and automate workflows directly inside tasks and docs.",
+    "website": "https://clickup.com"
+  },
+  {
+    "id": "elevenlabs",
+    "name": "ElevenLabs",
+    "category": "Voice AI",
+    "description": "AI-powered voice generation and text-to-speech platform that creates realistic, human-like voices in multiple languages and accents.",
+    "website": "https://elevenlabs.io"
+  },
+  {
+    "id": "murf-ai",
+    "name": "Murf AI",
+    "category": "Voice AI",
+    "description": "AI-powered text-to-speech platform for creating studio-quality voiceovers in multiple languages and accents.",
+    "website": "https://murf.ai"
+  },
+  {
+    "id": "playht",
+    "name": "PlayHT",
+    "category": "Voice AI",
+    "description": "AI-powered text-to-speech platform that creates realistic voices in multiple languages and accents, with support for real-time synthesis and voice cloning.",
+    "website": "https://play.ht"
+  },
+  {
+    "id": "speechify",
+    "name": "Speechify",
+    "category": "Voice AI",
+    "description": "AI-powered text-to-speech platform that converts books, articles, PDFs, and documents into natural-sounding audio for faster and more accessible learning.",
+    "website": "https://speechify.com"
+  },
+  {
+    "id": "descript-overdub",
+    "name": "Descript OverDub",
+    "category": "Voice AI",
+    "description": "AI-powered voice cloning and text-to-speech tool integrated into Descript, enabling users to create synthetic voices and correct audio recordings without re-recording.",
+    "website": "https://descript.com/overdub"
+  },
+  {
+    "id": "resemble-ai",
+    "name": "Resemble AI",
+    "category": "Voice AI",
+    "description": "AI-powered voice generation and cloning platform that creates realistic synthetic voices with emotional range and multilingual support.",
+    "website": "https://www.resemble.ai"
+  },
+  {
+    "id": "lovo-ai",
+    "name": "Lovo AI",
+    "category": "Voice AI",
+    "description": "AI-powered text-to-speech platform that creates realistic voiceovers in multiple languages and accents, with emotional tone and customization options.",
+    "website": "https://lovo.ai"
+  },
+  {
+    "id": "voicemod-ai",
+    "name": "Voicemod AI",
+    "category": "Voice AI",
+    "description": "AI-powered real-time voice changer and soundboard platform for gamers, streamers, and content creators.",
+    "website": "https://www.voicemod.net"
+  },
+  {
+    "id": "cleanvoice-ai",
+    "name": "Cleanvoice AI",
+    "category": "Voice AI",
+    "description": "AI-powered audio editing tool that removes filler words, mouth sounds, stuttering, and background noise to produce clean, professional recordings.",
+    "website": "https://cleanvoice.ai"
+  },
+  {
+    "id": "listnr-ai",
+    "name": "Listnr AI",
+    "category": "Voice AI",
+    "description": "AI-powered text-to-speech and audio publishing platform that converts written content into realistic voiceovers and podcasts.",
+    "website": "https://listnr.ai"
+  },
+  {
+    "id": "surfer-seo",
+    "name": "Surfer SEO",
+    "category": "Marketing AI",
+    "description": "AI-powered SEO platform that helps optimize content, conduct keyword research, and audit websites for higher rankings.",
+    "website": "https://surferseo.com"
+  },
+  {
+    "id": "growthbar-ai",
+    "name": "Growthbar AI",
+    "category": "Marketing AI",
+    "description": "AI-powered SEO writing tool that helps bloggers and marketers research, write, and optimize long-form content quickly.",
+    "website": "https://growthbarseo.com"
+  },
+  {
+    "id": "scalenut-ai",
+    "name": "Scalenut AI",
+    "category": "Marketing AI",
+    "description": "AI-powered SEO and content marketing platform that helps businesses plan, research, and write optimized content that ranks.",
+    "website": "https://www.scalenut.com"
+  },
+  {
+    "id": "marketmuse",
+    "name": "MarketMuse",
+    "category": "Marketing AI",
+    "description": "AI-powered content research and optimization platform that helps businesses plan, create, and improve content for higher search rankings.",
+    "website": "https://www.marketmuse.com"
+  },
+  {
+    "id": "adcreative-ai",
+    "name": "AdCreative AI",
+    "category": "Marketing AI",
+    "description": "AI-powered platform that generates conversion-focused ad creatives, social media posts, and banners optimized for multiple platforms.",
+    "website": "https://www.adcreative.ai"
+  },
+  {
+    "id": "ocoya-ai",
+    "name": "Ocoya AI",
+    "category": "Marketing AI",
+    "description": "AI-powered platform for social media content creation, scheduling, and analytics.",
+    "website": "https://www.ocoya.com"
+  },
+  {
+    "id": "copysmith-ai",
+    "name": "CopySmith AI",
+    "category": "Marketing AI",
+    "description": "AI-powered content creation platform for e-commerce, ads, blogs, and marketing campaigns.",
+    "website": "https://copysmith.ai"
+  },
+  {
+    "id": "peppertype-ai",
+    "name": "Peppertype AI",
+    "category": "Marketing AI",
+    "description": "AI-powered copywriting platform for ads, blogs, product descriptions, emails, and social media content.",
+    "website": "https://www.peppertype.ai"
+  },
+  {
+    "id": "anyword-ai",
+    "name": "Anyword AI",
+    "category": "Marketing AI",
+    "description": "AI-powered copywriting platform with predictive performance scoring to generate high-converting ads, emails, product descriptions, and social media posts.",
+    "website": "https://www.anyword.com"
+  },
+  {
+    "id": "hypotenuse-ai",
+    "name": "Hypotenuse AI",
+    "category": "Marketing AI",
+    "description": "AI-powered content creation platform for e-commerce, ads, blogs, and marketing campaigns.",
+    "website": "https://www.hypotenuse.ai"
+  },
+  {
+    "id": "canva-magic-studio",
+    "name": "Canva Magic Studio",
+    "category": "design AI",
+    "description": "Canva’s AI-powered creative suite that generates text, images, videos, and designs with tools like Magic Write, Magic Design, Magic Eraser, and more.",
+    "website": "https://www.canva.com/magic-studio"
+  },
+  {
+    "id": "looka-ai",
+    "name": "Looka AI",
+    "category": "design AI",
+    "description": "AI-powered logo and brand identity design platform that generates logos, brand kits, and marketing assets instantly.",
+    "website": "https://looka.com"
+  },
+  {
+    "id": "khroma-ai",
+    "name": "Khroma AI",
+    "category": "design AI",
+    "description": "AI-powered tool that learns your color preferences and generates unlimited personalized palettes with accessibility scoring.",
+    "website": "https://khroma.co"
+  },
+  {
+    "id": "uizard-ai",
+    "name": "Uizard AI",
+    "category": "design AI",
+    "description": "AI-powered design platform that converts sketches and text prompts into wireframes, mockups, and prototypes.",
+    "website": "https://uizard.io"
+  },
+  {
+    "id": "galileo-ai",
+    "name": "Galileo AI",
+    "category": "design AI",
+    "description": "Text-to-UI design platform that generates mobile and web app mockups from text prompts, exportable to Figma.",
+    "website": "https://www.usegalileo.ai"
+  },
+  {
+    "id": "fontjoy",
+    "name": "Fontjoy",
+    "category": "design AI",
+    "description": "AI-powered font pairing tool that uses deep learning to generate harmonious font combinations for design and branding.",
+    "website": "https://fontjoy.com"
+  },
+  {
+    "id": "designs-ai",
+    "name": "Designs AI",
+    "category": "design AI",
+    "description": "AI-powered platform for logos, videos, banners, and voiceovers, designed for businesses, marketers, and creators.",
+    "website": "https://designs.ai"
+  },
+  {
+    "id": "logo-ai",
+    "name": "Logo AI",
+    "category": "design AI",
+    "description": "AI-powered logo and brand identity design platform that generates logos, brand kits, and marketing assets instantly.",
+    "website": "https://logoai.com"
+  },
+  {
+    "id": "autodraw",
+    "name": "Autodraw",
+    "category": "design AI",
+    "description": "Free AI-powered sketch recognition tool that turns doodles into polished illustrations.",
+    "website": "https://www.autodraw.com"
+  },
+  {
+    "id": "framer",
+    "name": "Framer",
+    "category": "design AI",
+    "description": "AI-powered platform that generates responsive websites from text prompts, with built-in CMS, SEO, and more.",
+    "website": "https://www.framer.com"
+  },
+  {
+    "id": "resume-io-ai",
+    "name": "Resume.io AI",
+    "category": "Education/career/resume AI",
+    "description": "AI-powered resume builder with ATS-friendly templates, recruiter matching, and interview prep tools.",
+    "website": "https://resume.io"
+  },
+  {
+    "id": "kickresume-ai",
+    "name": "KickResume AI",
+    "category": "Education/career/resume AI",
+    "description": "AI-powered resume and cover letter builder with ATS-friendly templates, job search integration, and interview prep tools.",
+    "website": "https://kickresume.com"
+  },
+  {
+    "id": "rezi-ai",
+    "name": "Rezi AI",
+    "category": "Education/career/resume AI",
+    "description": "AI-powered resume builder focused on ATS optimization, job description targeting, and LinkedIn profile generation.",
+    "website": "https://www.rezi.ai"
+  },
+  {
+    "id": "teal-ai",
+    "name": "Teal AI",
+    "category": "Education/career/resume AI",
+    "description": "AI-powered platform for ATS-friendly resumes, cover letters, job tracking, and interview prep.",
+    "website": "https://tealhq.com"
+  },
+  {
+    "id": "huntr-ai",
+    "name": "Huntr AI",
+    "category": "Education/career/resume AI",
+    "description": "AI-powered platform for job tracking, ATS-friendly resumes, cover letters, and career insights.",
+    "website": "https://huntr.co"
+  },
+  {
+    "id": "interview-warmup",
+    "name": "Interview WarmUp (Google)",
+    "category": "Education/career/resume AI",
+    "description": "Free AI-powered tool by Google to practice interview questions, analyze responses, and get feedback on keywords and skills.",
+    "website": "https://grow.google/interview-warmup"
+  },
+  {
+    "id": "loopcv-ai",
+    "name": "LoopCV AI",
+    "category": "Education/career/resume AI",
+    "description": "AI-powered platform that automates job search by mass-applying daily, customizing applications, and contacting recruiters.",
+    "website": "https://loopcv.pro"
+  },
+  {
+    "id": "jobscan-ai",
+    "name": "Jobscan AI",
+    "category": "Education/career/resume AI",
+    "description": "AI-powered resume optimization tool that compares resumes against job descriptions, provides match scores, and ensures ATS compliance.",
+    "website": "https://www.jobscan.co"
+  },
+  {
+    "id": "careerflow-ai",
+    "name": "CareerFlow AI",
+    "category": "Education/career/resume AI",
+    "description": "AI-powered career copilot offering ATS-friendly resumes, LinkedIn optimization, job tracking, autofill, and skill gap analysis.",
+    "website": "https://careerflow.ai"
+  },
+  {
+    "id": "resumeworded-ai",
+    "name": "ResumeWorded AI",
+    "category": "Education/career/resume AI",
+    "description": "AI-powered platform that improves resumes, cover letters, and LinkedIn profiles with ATS compliance and recruiter visibility insights.",
+    "website": "https://resumeworded.com"
+  }
+]
+

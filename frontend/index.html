@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>100 AI Tools – TOOLMIND AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="navbar-inner">
+      <div class="logo">TOOLMIND AI</div>
+      <nav class="nav-links" id="nav-links">
+        <a href="#hero">Home</a>
+        <a href="#categories">Categories</a>
+        <a href="#compare">Compare</a>
+        <a href="https://github.com/your-username/100-ai-tools" target="_blank" rel="noopener">GitHub Repository</a>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main>
+    <section id="hero" class="hero">
+      <div class="hero-content">
+        <p class="hero-kicker">TOOLMIND AI</p>
+        <h1>Discover 100 Powerful AI Tools</h1>
+        <p class="hero-subtext">
+          Explore the best AI tools for coding, design, video generation, productivity, marketing, education, and more.
+        </p>
+        <div class="hero-actions">
+          <div class="hero-search-wrapper">
+            <input
+              type="text"
+              id="hero-search"
+              class="hero-search-input"
+              placeholder="Search tools by name or what you want to achieve..."
+            />
+            <button id="hero-search-btn" class="btn btn-primary">Search</button>
+          </div>
+          <div class="tool-counter">Explore <span id="tool-count">100</span> AI Tools</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main search + filters -->
+    <section class="search-filters">
+      <div class="search-bar">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search by tool name or description..."
+          aria-label="Search AI tools"
+        />
+      </div>
+
+      <div id="categories" class="categories">
+        <button class="chip chip-active" data-category="All">All</button>
+        <button class="chip" data-category="Image AI">Image AI</button>
+        <button class="chip" data-category="Video AI">Video AI</button>
+        <button class="chip" data-category="Voice AI">Voice AI</button>
+        <button class="chip" data-category="Coding AI">Coding AI</button>
+        <button class="chip" data-category="Research AI">Research AI</button>
+        <button class="chip" data-category="Writing AI">Writing AI</button>
+        <button class="chip" data-category="Productivity AI">Productivity AI</button>
+        <button class="chip" data-category="design AI">design AI</button>
+        <button class="chip" data-category="Marketing AI">Marketing AI</button>
+        <button class="chip" data-category="Education/career/resume AI">Education/career/resume AI</button>
+      </div>
+    </section>
+
+    <!-- AI Recommendation section -->
+    <section class="recommendation-section">
+      <div class="recommendation-inner">
+        <h2>Don't know which AI tool to use?</h2>
+        <p class="recommendation-subtitle">
+          Describe what you want to do and we'll recommend the best tools.
+        </p>
+        <form id="recommend-form" class="recommend-form">
+          <textarea
+            id="recommend-query"
+            rows="3"
+            placeholder="Example: I want AI to generate images from text"
+          ></textarea>
+          <button type="submit" class="btn btn-accent">Find Tools</button>
+        </form>
+        <div id="recommend-status" class="recommend-status"></div>
+        <div id="recommend-results" class="tool-grid recommend-grid"></div>
+      </div>
+    </section>
+
+    <!-- Tools grid -->
+    <section class="tools-section">
+      <div class="tools-header">
+        <h2>Browse AI Tools</h2>
+        <p>Filter, search, and discover tools tailored to your workflow.</p>
+      </div>
+
+      <div id="tools-loader" class="loader-wrapper">
+        <div class="loader"></div>
+        <p>Loading tools...</p>
+      </div>
+
+      <div id="tools-empty" class="empty-state" hidden>
+        <p>No tools match your search yet. Try adjusting your search or filters.</p>
+      </div>
+
+      <div id="tools-grid" class="tool-grid"></div>
+    </section>
+
+    <!-- Compare section -->
+    <section id="compare" class="compare-section">
+      <div class="compare-inner">
+        <div class="compare-header">
+          <h2>Compare Tools</h2>
+          <p>Select up to 3 tools from the cards above to compare them side-by-side.</p>
+        </div>
+
+        <div id="compare-empty" class="empty-state">
+          <p>No tools selected yet. Click <strong>Compare</strong> on any tool card to add it here.</p>
+        </div>
+
+        <div id="compare-table-wrapper" class="compare-table-wrapper" hidden>
+          <div class="compare-table-actions">
+            <button id="compare-clear" class="btn btn-ghost" type="button">Clear</button>
+          </div>
+          <div id="compare-table" class="compare-table"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p>© <span id="year"></span> TOOLMIND AI – 100 AI Tools Directory.</p>
+      <a href="https://github.com/your-username/100-ai-tools" target="_blank" rel="noopener" class="footer-link">
+        View on GitHub
+      </a>
+    </div>
+  </footer>
+
+  <script src="js/search.js?v=1"></script>
+  <script src="js/filters.js?v=1"></script>
+  <script src="js/recommend.js?v=1"></script>
+  <script src="js/compare.js?v=2"></script>
+  <script src="js/app.js?v=2"></script>
+</body>
+</html>
