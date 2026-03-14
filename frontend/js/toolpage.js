@@ -61,7 +61,7 @@ const API_BASE = "https://tool-mind-ai-1.onrender.com";
           return res.json();
         })
         .then((data) => {
-          const markdown = data.readme || "";
+          const markdown = data.markdown || "";
           readmeLoader.style.display = "none";
 
           if (!markdown.trim()) {
