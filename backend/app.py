@@ -332,6 +332,10 @@ def tool_extra():
 
   return jsonify(out)
 
+@app.route("/")
+def index():
+    return jsonify({"message": "ToolMind backend is running"})
+
 
 if __name__ == "__main__":
   port = int(os.environ.get("PORT", "5000"))
