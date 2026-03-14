@@ -1,5 +1,6 @@
-// Tool detail page: load tool info from tools.json using ?id= query param,
+// Tool detail page: load tool info from backend using ?id= query param,
 // then fetch and render the corresponding README.md via the Flask backend.
+const API_BASE = "https://tool-mind-ai-1.onrender.com";
 
 (function () {
   window.addEventListener("DOMContentLoaded", () => {
@@ -17,6 +18,7 @@
     const readmeError = document.getElementById("tool-readme-error");
     const readmeEl = document.getElementById("tool-readme");
     const yearSpan = document.getElementById("year");
+
     if (yearSpan) {
       yearSpan.textContent = new Date().getFullYear().toString();
     }
@@ -26,23 +28,23 @@
       return;
     }
 
-    fetch("data/tools.json")
-      .then((res) => res.json())
-      .then((tools) => {
-        const tool = tools.find((t) => String(t.id) === String(id));
-        if (!tool) {
-          showError("Tool not found. It may have been removed.");
-          return;
-        }
+    // Fetch tool metadata from backend
+    fetch(`${API_BASE}/tool-extra?tool=${encodeURIComponent(id)}`)
+      .then((res) => {
+        if (!res.ok) throw new Error(`Status ${res.status}`);
+        return res.json();
+      })
+      .then((tool) => {
         loader.style.display = "none";
         content.hidden = false;
-        nameEl.textContent = tool.name;
-        catEl.textContent = tool.category;
-        descEl.textContent = tool.description;
-        websiteEl.href = tool.website;
 
-        // Fetch README content from backend and render as markdown.
-        fetchToolReadme(tool.id);
+        nameEl.textContent = tool.name || "Unnamed Tool";
+        catEl.textContent = tool.category || "Uncategorized";
+        descEl.textContent = tool.description || "No description available.";
+        websiteEl.href = tool.website || "#";
+
+        // Fetch README content from backend
+        fetchToolReadme(id);
       })
       .catch((err) => {
         console.error(err);
@@ -50,33 +52,34 @@
       });
 
     function fetchToolReadme(toolId) {
-      const API_BASE = "http://127.0.0.1:5000";
       if (!readmeLoader || !readmeEl || !readmeError) return;
 
-      const url = `${API_BASE}/tool-readme?id=${encodeURIComponent(toolId)}`;
+      const url = `${API_BASE}/tool-readme?tool=${encodeURIComponent(toolId)}`;
       fetch(url)
         .then((res) => {
-          if (!res.ok) {
-            throw new Error(`Status ${res.status}`);
-          }
+          if (!res.ok) throw new Error(`Status ${res.status}`);
           return res.json();
         })
         .then((data) => {
-          const markdown = data.markdown || "";
+          const markdown = data.readme || "";
           readmeLoader.style.display = "none";
+
           if (!markdown.trim()) {
             readmeError.hidden = false;
             readmeError.textContent = "README is empty for this tool.";
             return;
           }
+
           const html =
             window.marked && typeof window.marked.parse === "function"
               ? window.marked.parse(markdown)
               : markdown.replace(/\n/g, "<br/>");
+
           readmeEl.innerHTML = html;
           readmeEl.hidden = false;
         })
-        .catch(() => {
+        .catch((err) => {
+          console.error(err);
           readmeLoader.style.display = "none";
           readmeError.hidden = false;
           readmeError.textContent =
@@ -92,3 +95,4 @@
     }
   });
 })();
+

@@ -1,4 +1,5 @@
 // Shared app bootstrap: load tools, wire search & filters, handle nav and hero search.
+const API_BASE = "https://tool-mind-ai-1.onrender.com";
 
 window.addEventListener("DOMContentLoaded", () => {
   const toolsGrid = document.getElementById("tools-grid");
@@ -137,38 +138,26 @@ window.addEventListener("DOMContentLoaded", () => {
   };
 
   // Fetch tools.json
-  fetch("data/tools.json")
-    .then((res) => res.json())
-    .then((data) => {
-      allTools = data;
-      window.aiSearch.initSearchInput(applySearchAndFilters);
-      window.aiFilters.initCategoryChips();
-      loader.style.display = "none";
-      renderTools(allTools);
 
-      if (window.aiCompare) {
-        window.aiCompare.loadFromStorage();
-        window.aiCompare.setToolGetter(getToolById);
-        window.aiCompare.initCompareTray();
-        window.aiCompare.renderCompare();
-        window.aiCompare.updateCompareButtons();
-      }
 
-      if (compareClear && window.aiCompare) {
-        compareClear.addEventListener("click", () => {
-          window.aiCompare.clearAll();
-          window.aiCompare.renderCompare();
-          window.aiCompare.updateCompareButtons();
-        });
-      }
-    })
-    .catch((err) => {
-      loader.style.display = "none";
-      console.error("Error loading tools:", err);
-      emptyState.hidden = false;
-      emptyState.textContent =
-        "Failed to load tools. Please refresh the page or check the console.";
-    });
+
+fetch(`${API_BASE}/recommend?query=default`)
+  .then((res) => res.json())
+  .then((data) => {
+    allTools = data;
+    window.aiSearch.initSearchInput(applySearchAndFilters);
+    window.aiFilters.initCategoryChips();
+    loader.style.display = "none";
+    renderTools(allTools);
+  })
+  .catch((err) => {
+    loader.style.display = "none";
+    console.error("Error loading tools:", err);
+    emptyState.hidden = false;
+    emptyState.textContent =
+      "Failed to load tools. Please refresh the page or check the console.";
+  });
+
 
   // Hero search simply focuses/updates main search input
   if (heroSearchBtn && heroSearchInput) {
