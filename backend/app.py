@@ -333,9 +333,7 @@ def tool_extra():
 
   return jsonify(out)
 
-@app.route("/")
-def index():
-    return jsonify({"message": "ToolMind backend is running"})
+
 
 @app.route("/")
 def serve_index():
