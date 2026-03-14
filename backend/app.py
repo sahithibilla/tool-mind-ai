@@ -4,6 +4,7 @@ import pickle
 import csv
 from dataclasses import dataclass
 from typing import List, Optional
+from flask import send_from_directory
 
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -336,6 +337,13 @@ def tool_extra():
 def index():
     return jsonify({"message": "ToolMind backend is running"})
 
+@app.route("/")
+def serve_index():
+    return send_from_directory(os.path.join(BASE_DIR, "..", "frontend"), "index.html")
+
+@app.route("/<path:path>")
+def static_proxy(path):
+    return send_from_directory(os.path.join(BASE_DIR, "..", "frontend"), path)
 
 if __name__ == "__main__":
   port = int(os.environ.get("PORT", "5000"))
