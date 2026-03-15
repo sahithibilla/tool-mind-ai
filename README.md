@@ -223,7 +223,7 @@ pip install -r backend/requirements.txt
 ### 3️⃣ Run the App
 
 From the project root:
-=======
+
 ### Run backend
 >>>>>>> origin/main
 
@@ -236,8 +236,8 @@ Or use the run script: `./run.sh` (or `bash run.sh`).
 
 ### 4️⃣ Open the Website
 
-**Important:** Open the app in your browser at:
-=======
+*Important:* Open the app in your browser at:
+
 Backend runs at:
 >>>>>>> origin/main
 
@@ -246,7 +246,7 @@ http://127.0.0.1:5000
 ```
 
 <<<<<<< HEAD
-Do **not** open `frontend/index.html` directly (file://). The Flask server serves the frontend and the API; tool READMEs and the Compare feature only work when you use **http://127.0.0.1:5000**.
+Do *not* open `frontend/index.html` directly (file://). The Flask server serves the frontend and the API; tool READMEs and the Compare feature only work when you use **http://127.0.0.1:5000**.
 =======
 ### Open frontend
 
