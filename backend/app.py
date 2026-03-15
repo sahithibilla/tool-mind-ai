@@ -7,18 +7,30 @@ from typing import List, Optional
 from flask import send_from_directory
 
 from flask import Flask, jsonify, request
-from flask_cors import CORS
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
+try:
+  from flask_cors import CORS
+  HAS_CORS = True
+except ImportError:
+  HAS_CORS = False
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-TOOLS_PATH = os.path.join(BASE_DIR, "..", "frontend", "data", "tools.json")
+REPO_ROOT = os.path.abspath(os.path.join(BASE_DIR, ".."))
+TOOLS_PATH = os.path.join(REPO_ROOT, "frontend", "data", "tools.json")
 MODEL_PATH = os.path.join(BASE_DIR, "model.pkl")
 PROJECT_ROOT = os.path.abspath(os.path.join(BASE_DIR, "..", ".."))
-CSV_PATH = os.path.join(PROJECT_ROOT, "AI-TOOLS - Sheet1.csv")
+CSV_PATH = os.path.join(REPO_ROOT, "AI-TOOLS - Sheet1.csv")
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})
+if HAS_CORS:
+  CORS(app, resources={r"/*": {"origins": "*"}})
+else:
+  @app.after_request
+  def _add_cors(resp):
+    resp.headers["Access-Control-Allow-Origin"] = "*"
+    return resp
 
 
 @dataclass
@@ -94,10 +106,10 @@ def load_tool_extras_from_csv() -> dict:
     return extras
 
   try:
-    with open(CSV_PATH, "r", encoding="utf-8", newline="") as f:
+    with open(CSV_PATH, "r", encoding="utf-8-sig", newline="") as f:
       reader = csv.DictReader(f)
       for row in reader:
-        tool_name = row.get("Tool Name", "") or ""
+        tool_name = (row.get("Tool Name", "") or "").strip()
         key = _norm_name(tool_name)
         if not key:
           continue
@@ -106,7 +118,7 @@ def load_tool_extras_from_csv() -> dict:
           "uniqueFeature": (row.get("Unique Feature", "") or "").strip(),
           "pricing": (row.get("Free/Paid", "") or "").strip(),
         }
-  except OSError:
+  except (OSError, Exception):
     return {}
 
   return extras
@@ -150,43 +162,57 @@ def map_category_to_readme_dir(category: str) -> Optional[str]:
   return mapping.get(category)
 
 
+def _normalize_name_for_readme(name: str) -> str:
+    """Normalize tool/folder name for matching (e.g. 'Jasper AI' and 'Jasper' both -> 'jasper')."""
+    s = (name or "").strip().lower()
+    s = s.replace(" ai", "").strip()
+    return " ".join(s.split())
+
+
 def find_readme_for_tool(tool: ToolItem) -> Optional[str]:
-  """
-  Locate the README.md file for a given tool.
-  We attempt a direct category-based lookup first, then fall back
-  to a recursive search under PROJECT_ROOT matching the tool folder
-  name case-insensitively.
-  """
-  category_dir = map_category_to_readme_dir(tool.category)
+    """
+    Locate the README.md file for a given tool.
+    READMEs live under 100-AI-TOOLS/<CategoryFolder>/<ToolFolder>/README.md.
+    """
+    repo_root = os.path.abspath(os.path.join(BASE_DIR, ".."))
+    readme_base = os.path.join(repo_root, "100-AI-TOOLS")
+    if not os.path.isdir(readme_base):
+        return None
 
-  # Direct category-based lookup (fast path)
-  if category_dir:
-    candidate = os.path.join(PROJECT_ROOT, category_dir, tool.name, "README.md")
-    if os.path.exists(candidate):
-      return candidate
+    target_name = tool.name.lower()
+    target_normalized = _normalize_name_for_readme(tool.name)
 
-    category_path = os.path.join(PROJECT_ROOT, category_dir)
-    if os.path.isdir(category_path):
-      try:
-        for entry in os.listdir(category_path):
-          if entry.lower() == tool.name.lower():
-            candidate2 = os.path.join(category_path, entry, "README.md")
-            if os.path.exists(candidate2):
-              return candidate2
-      except OSError:
-        pass
+    def name_matches(entry_name: str) -> bool:
+        en = (entry_name or "").strip().lower()
+        if en == target_name:
+            return True
+        return _normalize_name_for_readme(entry_name) == target_normalized
 
-  # Fallback: walk the whole project tree and look for a README.md
-  # whose parent directory matches the tool name (case-insensitive).
-  target_name = tool.name.lower()
-  for root, dirs, files in os.walk(PROJECT_ROOT):
-    if "README.md" not in files:
-      continue
-    parent = os.path.basename(root).lower()
-    if parent == target_name:
-      return os.path.join(root, "README.md")
+    # Try category-mapped folder first
+    category_dir = map_category_to_readme_dir(tool.category)
+    if category_dir:
+        cat_path = os.path.join(readme_base, category_dir)
+        if os.path.isdir(cat_path):
+            for entry in os.listdir(cat_path):
+                if name_matches(entry):
+                    candidate = os.path.join(cat_path, entry, "README.md")
+                    if os.path.exists(candidate):
+                        return candidate
 
-  return None
+    # Fallback: scan all category folders for a matching tool name
+    for entry in os.listdir(readme_base):
+        cat_path = os.path.join(readme_base, entry)
+        if not os.path.isdir(cat_path):
+            continue
+        for sub in os.listdir(cat_path):
+            if name_matches(sub):
+                candidate = os.path.join(cat_path, sub, "README.md")
+                if os.path.exists(candidate):
+                    return candidate
+
+    return None
+
+
 
 
 def build_and_save_model() -> RecommendModel:
@@ -226,12 +252,12 @@ def get_model() -> RecommendModel:
   return _model
 
 
-@app.get("/health")
+@app.route("/health", methods=["GET"])
 def health():
   return jsonify({"status": "ok"})
 
 
-@app.get("/recommend")
+@app.route("/recommend", methods=["GET"])
 def recommend():
   """
   Recommend tools based on a natural language query.
@@ -261,7 +287,7 @@ def recommend():
   return jsonify(results)
 
 
-@app.get("/tool-readme")
+@app.route("/tool-readme", methods=["GET"])
 def tool_readme():
   """
   Return the full README.md markdown content for a given tool.
@@ -297,7 +323,7 @@ def tool_readme():
   )
 
 
-@app.get("/tool-extra")
+@app.route("/tool-extra", methods=["GET"])
 def tool_extra():
   """
   Return extra CSV fields for one or more tool ids.
@@ -322,12 +348,17 @@ def tool_extra():
     if not t:
       continue
     extra = extras.get(_norm_name(t.name), {})
+    uses = (extra.get("uses") or "").strip()
+    unique_feature = (extra.get("uniqueFeature") or "").strip()
+    pricing = (extra.get("pricing") or "").strip()
+    if not uses and t.description:
+      uses = (t.description or "").strip()
     out.append(
       {
         "id": t.id,
-        "uses": extra.get("uses", ""),
-        "uniqueFeature": extra.get("uniqueFeature", ""),
-        "pricing": extra.get("pricing", ""),
+        "uses": uses,
+        "uniqueFeature": unique_feature,
+        "pricing": pricing,
       }
     )
 

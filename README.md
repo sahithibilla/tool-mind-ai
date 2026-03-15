@@ -147,44 +147,58 @@ cd toolmind
 pip install -r backend/requirements.txt
 ```
 
-### 3️⃣ Run the Backend Server
+### 3️⃣ Run the App
+
+From the project root:
 
 ```bash
 python backend/app.py
 ```
 
-The backend will start at:
+Or use the run script: `./run.sh` (or `bash run.sh`).
+
+### 4️⃣ Open the Website
+
+**Important:** Open the app in your browser at:
 
 ```
 http://127.0.0.1:5000
 ```
 
-### 4️⃣ Open the Website
-
-Open:
-
-```
-frontend/index.html
-```
-
-in your browser.
+Do **not** open `frontend/index.html` directly (file://). The Flask server serves the frontend and the API; tool READMEs and the Compare feature only work when you use **http://127.0.0.1:5000**.
 
 ---
 
 # 🌐 Deployment
 
-The project can be deployed using:
+You can deploy TOOLMIND as a **single app** (Flask serves both the website and the API).
 
-* **Render** for the Flask backend
-* **Vercel / GitHub Pages** for the frontend
+### Option 1: Deploy on Render (recommended)
 
-Example deployment flow:
+1. Push your code to **GitHub** (ensure `AI-TOOLS - Sheet1.csv`, `100-AI-TOOLS/`, `frontend/`, and `backend/` are committed).
+2. Go to [render.com](https://render.com) and sign in.
+3. Click **New** → **Web Service** and connect your GitHub repo.
+4. Use these settings:
+   - **Build Command:** `pip install -r requirements.txt`
+   - **Start Command:** `gunicorn backend.app:app --bind 0.0.0.0:$PORT`
+   - **Environment:** Leave default (Render sets `PORT`).
+5. Click **Create Web Service**. After the build, your site will be live at `https://<your-service>.onrender.com`.
 
+**Or** use the Blueprint: in the repo root, use the **Blueprint** option and select `render.yaml` for one-click setup.
+
+### Option 2: Deploy with Docker
+
+```bash
+docker build -t toolmind-ai .
+docker run -p 5000:5000 -e PORT=5000 toolmind-ai
 ```
-Frontend → Vercel
-Backend → Render
-Model → Render Server
-```
+
+Then expose port 5000 via your host or cloud (e.g. Railway, Fly.io, AWS).
+
+### After deployment
+
+- Open the app at the URL provided (e.g. `https://your-app.onrender.com`).
+- README details, Compare table, and recommendations all work from the same URL; no extra frontend deploy needed.
 
 ---
 

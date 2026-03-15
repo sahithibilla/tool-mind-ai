@@ -4,7 +4,11 @@
   const MAX_COMPARE = 3;
   const storageKey = "toolmind_compare_ids";
   const urlParamKey = "compare";
-  const API_BASE = "http://127.0.0.1:5000";
+  var API_BASE = "";
+  if (typeof window !== "undefined" && window.location && window.location.protocol) {
+    var p = window.location.protocol;
+    API_BASE = (p === "http:" || p === "https:") ? "" : "https://tool-mind-ai-1.onrender.com";
+  }
 
   let selectedIds = new Set();
   let getToolById = null;
@@ -74,6 +78,16 @@
     saveToStorage();
   }
 
+  /** Remove selected ids that don't exist in the current tool list so the table can fill. */
+  function pruneInvalidIds() {
+    if (typeof getToolById !== "function") return;
+    const valid = [...selectedIds].filter((id) => getToolById(id));
+    if (valid.length !== selectedIds.size) {
+      selectedIds = new Set(valid);
+      saveToStorage();
+    }
+  }
+
   function buildShareUrl() {
     const ids = [...selectedIds];
     const url = new URL(window.location.href);
@@ -124,10 +138,17 @@
       return;
     }
 
+    const tools = ids.map((id) => getToolById(id)).filter(Boolean);
+    if (tools.length === 0) {
+      empty.hidden = false;
+      wrapper.hidden = true;
+      table.innerHTML = "";
+      pruneInvalidIds();
+      return;
+    }
+
     empty.hidden = true;
     wrapper.hidden = false;
-
-    const tools = ids.map((id) => getToolById(id)).filter(Boolean);
 
     // Pull CSV-derived extras from backend (uses/uniqueFeature/pricing)
     // and re-render once loaded.
@@ -139,7 +160,7 @@
       {
         key: "uses",
         label: "Uses",
-        render: (t) => escapeHtml(extrasById[t.id]?.uses || ""),
+        render: (t) => escapeHtml(extrasById[t.id]?.uses || t.description || ""),
       },
       {
         key: "uniqueFeature",
@@ -303,15 +324,15 @@
 
   function escapeHtml(str) {
     return String(str || "")
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
   }
 
   function escapeAttr(str) {
-    return escapeHtml(str).replaceAll("`", "&#096;");
+    return escapeHtml(str).replace(/`/g, "&#096;");
   }
 
   function normalizeValueForDiff(tool, key) {
@@ -324,34 +345,40 @@
     return String(val).trim().toLowerCase();
   }
 
+  function applyExtras(arr) {
+    if (!Array.isArray(arr)) return;
+    const next = { ...extrasById };
+    arr.forEach((item) => {
+      if (!item?.id) return;
+      next[String(item.id)] = {
+        uses: item.uses || "",
+        uniqueFeature: item.uniqueFeature || "",
+        pricing: item.pricing || "",
+      };
+    });
+    extrasById = next;
+    renderCompare();
+    updateCompareButtons();
+  }
+
   function ensureExtrasLoaded(ids) {
     const missing = ids.filter((id) => !extrasById[id]);
     if (missing.length === 0) return;
     if (extrasFetchInFlight) return;
 
-    const url = `${API_BASE}/tool-extra?ids=${encodeURIComponent(missing.join(","))}`;
+    var path = "tool-extra?ids=" + encodeURIComponent(missing.join(","));
+    var url = API_BASE ? (API_BASE + "/" + path) : ("/" + path);
     extrasFetchInFlight = fetch(url)
-      .then((res) => (res.ok ? res.json() : []))
-      .then((arr) => {
-        if (Array.isArray(arr)) {
-          const next = { ...extrasById };
-          arr.forEach((item) => {
-            if (!item?.id) return;
-            next[String(item.id)] = {
-              uses: item.uses || "",
-              uniqueFeature: item.uniqueFeature || "",
-              pricing: item.pricing || "",
-            };
-          });
-          extrasById = next;
+      .then((res) => (res.ok ? res.json() : Promise.reject()))
+      .then(applyExtras)
+      .catch(function () {
+        var fallback = "http://127.0.0.1:5000/" + path;
+        if (url !== fallback) {
+          return fetch(fallback).then((r) => (r.ok ? r.json() : [])).then(applyExtras);
         }
-      })
-      .catch(() => {
-        // ignore; table will show —
       })
       .finally(() => {
         extrasFetchInFlight = null;
-        // Re-render to fill cells once data arrives
         renderCompare();
         updateCompareButtons();
       });
@@ -362,6 +389,7 @@
     setToolGetter(fn) {
       getToolById = fn;
     },
+    pruneInvalidIds,
     toggleTool,
     clearAll,
     copyShareLink,
@@ -372,5 +400,23 @@
       return [...selectedIds];
     },
   };
+
+  // Wire "Clear" button in the compare section
+  function wireCompareClear() {
+    const clearBtn = document.getElementById("compare-clear");
+    if (clearBtn) {
+      clearBtn.addEventListener("click", () => {
+        clearAll();
+        renderCompare();
+        updateCompareButtons();
+      });
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", wireCompareClear);
+  } else {
+    wireCompareClear();
+  }
 })();
 

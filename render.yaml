@@ -1,0 +1,12 @@
+# Render Blueprint: one-click deploy for TOOLMIND AI
+# Docs: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: toolmind-ai
+    runtime: python
+    region: oregon
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn backend.app:app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.0

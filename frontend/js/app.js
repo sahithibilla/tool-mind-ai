@@ -1,6 +1,4 @@
 // Shared app bootstrap: load tools, wire search & filters, handle nav and hero search.
-const API_BASE = "https://tool-mind-ai-1.onrender.com";
-
 window.addEventListener("DOMContentLoaded", () => {
   const toolsGrid = document.getElementById("tools-grid");
   const loader = document.getElementById("tools-loader");
@@ -82,7 +80,6 @@ window.addEventListener("DOMContentLoaded", () => {
         if (!window.aiCompare) return;
         const res = window.aiCompare.toggleTool(tool.id);
         if (!res.ok && res.action === "limit") {
-          // Lightweight feedback without intrusive alerts
           compareBtn.textContent = "Max 3";
           setTimeout(() => window.aiCompare.updateCompareButtons(), 600);
           return;
@@ -137,27 +134,39 @@ window.addEventListener("DOMContentLoaded", () => {
     },
   };
 
-  // Fetch tools.json
+  // Load tools and wire search, filters, and compare
+  fetch("data/tools.json")
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      allTools = Array.isArray(data) ? data : [];
+      if (window.aiSearch && typeof window.aiSearch.initSearchInput === "function") {
+        window.aiSearch.initSearchInput(applySearchAndFilters);
+      }
+      if (window.aiFilters && typeof window.aiFilters.initCategoryChips === "function") {
+        window.aiFilters.initCategoryChips();
+      }
+      loader.style.display = "none";
+      renderTools(allTools);
 
-
-
-fetch(`${API_BASE}/recommend?query=default`)
-  .then((res) => res.json())
-  .then((data) => {
-    allTools = data;
-    window.aiSearch.initSearchInput(applySearchAndFilters);
-    window.aiFilters.initCategoryChips();
-    loader.style.display = "none";
-    renderTools(allTools);
-  })
-  .catch((err) => {
-    loader.style.display = "none";
-    console.error("Error loading tools:", err);
-    emptyState.hidden = false;
-    emptyState.textContent =
-      "Failed to load tools. Please refresh the page or check the console.";
-  });
-
+      // Wire compare: set getToolById first, then restore selection and render
+      if (window.aiCompare) {
+        window.aiCompare.setToolGetter(getToolById);
+        window.aiCompare.loadFromStorage();
+        if (typeof window.aiCompare.pruneInvalidIds === "function") {
+          window.aiCompare.pruneInvalidIds();
+        }
+        window.aiCompare.initCompareTray();
+        window.aiCompare.renderCompare();
+        window.aiCompare.updateCompareButtons();
+      }
+    })
+    .catch((err) => {
+      loader.style.display = "none";
+      console.error("Error loading tools:", err);
+      emptyState.hidden = false;
+      emptyState.textContent =
+        "Failed to load tools. Please refresh the page or check the console.";
+    });
 
   // Hero search simply focuses/updates main search input
   if (heroSearchBtn && heroSearchInput) {
@@ -170,3 +179,4 @@ fetch(`${API_BASE}/recommend?query=default`)
     });
   }
 });
+

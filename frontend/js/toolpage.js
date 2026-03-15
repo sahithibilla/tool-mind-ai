@@ -1,6 +1,15 @@
-// Tool detail page: load tool info from local tools.json using ?id= query param,
-// then fetch and render the corresponding README.md via the Flask backend.
-const API_BASE = "https://tool-mind-ai-1.onrender.com";
+// Tool detail page: load tool info from local tools.json, then fetch README from backend.
+// When served over http(s) (e.g. Flask), use relative URL so the same server is used.
+// When opened as file://, use deployed API as fallback.
+var API_BASE = "";
+if (typeof window !== "undefined") {
+  var proto = window.location && window.location.protocol;
+  if (proto === "http:" || proto === "https:") {
+    API_BASE = "";  // relative: /tool-readme
+  } else {
+    API_BASE = "https://tool-mind-ai-1.onrender.com";
+  }
+}
 
 (function () {
   window.addEventListener("DOMContentLoaded", () => {
@@ -45,8 +54,10 @@ const API_BASE = "https://tool-mind-ai-1.onrender.com";
         descEl.textContent = tool.description;
         websiteEl.href = tool.website;
 
-        // Fetch README content from backend
-        fetchToolReadme(tool.id);
+        // Fetch README content from backend (after a tick so marked may be ready)
+        requestAnimationFrame(function () {
+          fetchToolReadme(tool.id);
+        });
       })
       .catch((err) => {
         console.error(err);
@@ -54,36 +65,47 @@ const API_BASE = "https://tool-mind-ai-1.onrender.com";
       });
 
     function fetchToolReadme(toolId) {
-      const url = `${API_BASE}/tool-readme?tool=${encodeURIComponent(toolId)}`;
-      fetch(url)
-        .then((res) => {
-          if (!res.ok) throw new Error(`Status ${res.status}`);
-          return res.json();
-        })
-        .then((data) => {
-          const markdown = data.markdown || "";
-          readmeLoader.style.display = "none";
+      readmeError.hidden = true;
+      readmeEl.hidden = true;
+      var path = "tool-readme?id=" + encodeURIComponent(toolId);
+      var url = API_BASE ? (API_BASE + "/" + path) : ("/" + path);
 
-          if (!markdown.trim()) {
-            readmeError.hidden = false;
-            readmeError.textContent = "README is empty for this tool.";
+      function onSuccess(data) {
+        var markdown = data.markdown || "";
+        readmeLoader.style.display = "none";
+        if (!markdown.trim()) {
+          readmeError.hidden = false;
+          readmeError.textContent = "README is empty for this tool.";
+          return;
+        }
+        var html = (window.marked && typeof window.marked.parse === "function")
+          ? window.marked.parse(markdown)
+          : markdown.replace(/\n/g, "<br/>");
+        readmeEl.innerHTML = html;
+        readmeEl.hidden = false;
+      }
+      function onFail() {
+        readmeLoader.style.display = "none";
+        readmeError.hidden = false;
+        readmeError.textContent = "Detailed README could not be loaded. Run the app with: python backend/app.py and open http://127.0.0.1:5000";
+      }
+
+      fetch(url)
+        .then(function (res) {
+          if (res.ok) return res.json();
+          throw new Error("" + res.status);
+        })
+        .then(onSuccess)
+        .catch(function (err) {
+          var fallbackUrl = "http://127.0.0.1:5000/" + path;
+          if (url === fallbackUrl) {
+            onFail();
             return;
           }
-
-          const html =
-            window.marked && typeof window.marked.parse === "function"
-              ? window.marked.parse(markdown)
-              : markdown.replace(/\n/g, "<br/>");
-
-          readmeEl.innerHTML = html;
-          readmeEl.hidden = false;
-        })
-        .catch((err) => {
-          console.error(err);
-          readmeLoader.style.display = "none";
-          readmeError.hidden = false;
-          readmeError.textContent =
-            "Detailed README could not be loaded for this tool.";
+          fetch(fallbackUrl)
+            .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+            .then(onSuccess)
+            .catch(function () { onFail(); });
         });
     }
 
