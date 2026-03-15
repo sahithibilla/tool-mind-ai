@@ -1,52 +1,84 @@
 # 🧠 TOOLMIND
 
-### Discover • Learn • Find the Right AI Tool
+### Learn • Compare • Find the Right AI Tool
 
-**TOOLMIND** is an intelligent platform designed to help users **discover, learn, and choose the right AI tools** for their needs.
-With hundreds of AI tools emerging every year, it can be difficult to know which tool is best for a specific task. TOOLMIND solves this problem by combining a **curated AI tools directory with an AI-powered recommendation system**.
+**TOOLMIND** is an intelligent platform designed to help users **discover, learn about, compare, and choose the best AI tools** for their needs.
 
-The platform provides detailed information about AI tools and allows users to **search, explore categories, and receive personalized tool recommendations** based on what they want to accomplish.
+With the rapid growth of AI technologies, hundreds of tools are available for tasks such as image generation, coding assistance, automation, writing, and more. TOOLMIND simplifies this ecosystem by combining a **curated AI tools dataset, an AI-powered recommendation system, and a comparison feature** into a single platform.
+
+The project also includes a **manually curated dataset of 100 AI tools**, with individual documentation for each tool.
 
 ---
 
-# 🚀 Features
+# 🌐 Live Demo
+
+🔗 **Website:**
+https://tool-mind-ai-1.onrender.com
+
+---
+
+# 🚀 Key Features
 
 ### 🔎 AI Tool Discovery
 
-Explore a curated collection of **100 AI tools** organized across multiple categories.
+Browse a curated collection of **100 AI tools** organized into structured categories.
 
-### 🧠 AI Tool Recommendation System
+Users can explore tools and learn about:
 
-Not sure which AI tool to use?
-
-Use the **AI-powered recommendation feature** to describe your task, and TOOLMIND will suggest the **best matching tools** using semantic similarity.
-
-### 📚 Learn About Each Tool
-
-Every tool includes:
-
-* Description
-* Category
-* Key use cases
-* Official website link
-
-### 🔍 Smart Search
-
-Quickly find tools by searching keywords related to your task or tool functionality.
-
-### 📂 Category-Based Browsing
-
-Tools are organized into structured categories to make discovery easier.
-
-### 🌐 Modern Web Interface
-
-A responsive website designed to provide a **clean and intuitive user experience**.
+* What the tool does
+* Use cases
+* Key capabilities
+* Official website links
 
 ---
 
-# 🧰 AI Tool Categories
+### 🧠 AI-Powered Tool Recommendation
 
-TOOLMIND currently includes **100 AI tools** distributed across the following categories:
+Not sure which AI tool to use?
+
+TOOLMIND includes a **machine learning–based recommendation system**.
+
+Users can describe their task and the system will suggest **the most relevant AI tools**.
+
+Example query:
+
+```text
+"I need an AI tool to generate images from text prompts"
+```
+
+The system returns the **top matching tools instantly**.
+
+---
+
+### ⚖️ Tool Comparison Feature
+
+Users can select **up to 3 tools** and compare them side-by-side.
+
+Comparison includes aspects such as:
+
+* Category
+* Description
+* Features
+* Use cases
+* Unique capabilities
+
+This makes it easier to **choose the best tool for a specific task**.
+
+---
+
+### 🔍 Smart Search
+
+Quickly search tools by:
+
+* Tool name
+* Keywords
+* Capabilities
+
+---
+
+### 📂 Category-Based Browsing
+
+Tools are organized into categories including:
 
 * 🎨 Image Generation AI
 * 🎬 Video Generation AI
@@ -55,48 +87,80 @@ TOOLMIND currently includes **100 AI tools** distributed across the following ca
 * 🔍 Research AI Tools
 * ✍️ Writing AI Tools
 * 📊 Productivity AI
-* 🤖 Automation AI
+* 🤖 Design AI
 * 📈 Marketing AI
 * 🎓 Education / Learning AI
 
 ---
 
+# 📊 AI Tools Dataset
+
+A major part of this project involved **collecting and organizing a dataset of AI tools**.
+
+The dataset includes **100 AI tools** with structured information such as:
+
+* Tool Name
+* Category
+* Description
+* Use Cases
+* Unique Features
+* Official Website
+
+This dataset was used to build the **AI recommendation system and the web platform**.
+
+---
+
+# 📄 Tool Documentation
+
+Each AI tool included in the dataset also has its own **dedicated README file**.
+
+These documentation files include:
+
+* Overview of the tool
+* Core capabilities
+* Key use cases
+* Unique features
+* Official resource links
+
+This repository therefore serves as both:
+
+• a **learning resource for AI tools**
+• a **dataset for building AI tool platforms**
+
+---
+
 # 🧠 AI Recommendation Engine
 
-TOOLMIND includes a **machine learning based recommendation system**.
+The recommendation system uses **semantic embeddings** to match user queries with AI tool descriptions.
 
-### How it Works
+### Workflow
 
-1. The user enters a task description.
-
-Example:
-
-```text
-"I want AI to generate images from text prompts"
+```
+User Query
+     ↓
+Convert Query to Embedding
+     ↓
+Compare with Tool Embeddings
+     ↓
+Return Top Matching Tools
 ```
 
-2. The system converts the query into **vector embeddings** using a language model.
-
-3. The query is compared with embeddings of all AI tools.
-
-4. The system returns the **most relevant tools**.
-
-This allows users to discover tools based on **intent rather than exact keywords**.
+This allows the system to recommend tools based on **intent rather than exact keyword matches**.
 
 ---
 
 # 🏗 Project Architecture
 
-```text
-User Query
+```
+User Input
      ↓
 Frontend Website
      ↓
-Flask API (Backend)
+Flask Backend API
      ↓
 ML Recommendation Model (model.pkl)
      ↓
-Top AI Tools Returned
+Top AI Tools Suggested
 ```
 
 ---
@@ -116,61 +180,93 @@ frontend/
 │
 ├── index.html
 ├── tool.html
+├── compare.html
+│
 ├── css/
 │   └── style.css
 │
 ├── js/
 │   ├── app.js
-│   ├── recommend.js
 │   ├── search.js
+│   ├── recommend.js
+│   ├── compare.js
 │   └── toolpage.js
 
 data/
 │
 └── tools.json
+
+tools/
+│
+├── image-ai/
+├── video-ai/
+├── coding-ai/
+├── writing-ai/
+├── research-ai/
+└── ...
 ```
 
 ---
 
-# ⚙️ Running the Project Locally
+# ⚙️ Running Locally
 
-### 1️⃣ Clone the Repository
+### Clone the repository
 
-```bash
-git clone https://github.com/yourusername/toolmind.git
+```
+git clone https://github.com/YOUR_USERNAME/toolmind.git
 cd toolmind
 ```
 
-### 2️⃣ Install Backend Dependencies
+### Install dependencies
 
-```bash
+```
 pip install -r backend/requirements.txt
 ```
 
+<<<<<<< HEAD
 ### 3️⃣ Run the App
 
 From the project root:
+=======
+### Run backend
+>>>>>>> origin/main
 
-```bash
+```
 python backend/app.py
 ```
 
+<<<<<<< HEAD
 Or use the run script: `./run.sh` (or `bash run.sh`).
 
 ### 4️⃣ Open the Website
 
 **Important:** Open the app in your browser at:
+=======
+Backend runs at:
+>>>>>>> origin/main
 
 ```
 http://127.0.0.1:5000
 ```
 
+<<<<<<< HEAD
 Do **not** open `frontend/index.html` directly (file://). The Flask server serves the frontend and the API; tool READMEs and the Compare feature only work when you use **http://127.0.0.1:5000**.
+=======
+### Open frontend
+
+Open:
+
+```
+frontend/index.html
+```
+
+in your browser.
+>>>>>>> origin/main
 
 ---
 
-# 🌐 Deployment
 
+<<<<<<< HEAD
 You can deploy TOOLMIND as a **single app** (Flask serves both the website and the API).
 
 ### Option 1: Deploy on Render (recommended)
@@ -205,11 +301,17 @@ Then expose port 5000 via your host or cloud (e.g. Railway, Fly.io, AWS).
 # 🎯 Purpose of the Project
 
 TOOLMIND was built to:
+=======
+# 🎯 Project Goals
+
+This project was built to:
+>>>>>>> origin/main
 
 * Simplify the process of **discovering AI tools**
-* Help users **find the best tool for their task**
-* Provide a **learning platform for modern AI tools**
-* Demonstrate a **real-world AI-powered recommendation system**
+* Provide **AI-powered recommendations**
+* Allow **side-by-side comparison of tools**
+* Create a **curated dataset of AI tools**
+* Serve as a **learning resource for modern AI technologies**
 
 ---
 
@@ -221,24 +323,23 @@ TOOLMIND was built to:
 
 # ⭐ Support
 
-If you found this project useful:
+If you found this project helpful:
 
 ⭐ Star the repository
-🔗 Share the project
+🔗 Share it with others
 💡 Suggest new AI tools
 
 ---
 
 # 🔮 Future Improvements
 
-Potential upgrades for TOOLMIND include:
+Planned improvements include:
 
-* Trending AI tools
+* Trending AI tools section
 * User ratings and reviews
-* Tool comparison system
+* Tool bookmarking
 * More advanced recommendation models
 * Automatic dataset updates
 
 ---
-
 
