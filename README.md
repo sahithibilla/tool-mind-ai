@@ -10,12 +10,8 @@ The project also includes a **manually curated dataset of 100 AI tools**, with i
 
 ---
 
-# 🌐 Live Demo
 
-🔗 **Website:**
-https://tool-mind-ai-1.onrender.com
 
----
 
 # 🚀 Key Features
 
